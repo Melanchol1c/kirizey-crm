@@ -1,0 +1,29 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import", "typescript", "@typescript-eslint"],
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "eslint:recommended",
+    "prettier/react"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/imports-first": "error",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-use-before-define": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  }
+}
