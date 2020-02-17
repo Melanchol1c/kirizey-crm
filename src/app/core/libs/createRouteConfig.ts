@@ -1,18 +1,18 @@
 type RouteMetaType = {
-  layout: JSX.Element | null;
+  layout: React.FC<any> | null;
   auth: boolean;
 };
 
 type RouteConfigType = {
   path: string;
-  component: JSX.Element;
+  component: React.FC<any>;
   meta: RouteMetaType;
 };
 
 const createRouteConfig = (
   path: string,
-  component: JSX.Element,
-  layout: JSX.Element | null = null,
+  component: React.FC<any>,
+  layout: React.FC<any> | null = null,
   auth = false,
 ): RouteConfigType => {
   return {

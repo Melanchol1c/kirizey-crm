@@ -1,6 +1,8 @@
 import React from 'react';
 
-const SignInPage = () => {
+type SignInPageType = {};
+
+const SignInPage: React.FC<SignInPageType> = () => {
   return (
     <div>
       <h1>sign in</h1>
