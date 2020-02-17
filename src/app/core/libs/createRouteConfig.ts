@@ -1,23 +1,17 @@
-type RouteMetaType = {
-  layout: React.FC<any> | null;
-  auth: boolean;
-};
-
-type RouteConfigType = {
-  path: string;
-  component: React.FC<any>;
-  meta: RouteMetaType;
-};
+import { RouteConfigType } from '../models/RouteConfigType';
+import DefaultLayout from '../../layout/DefaultLayout';
 
 const createRouteConfig = (
   path: string,
   component: React.FC<any>,
-  layout: React.FC<any> | null = null,
+  layout: React.FC<any> = DefaultLayout,
   auth = false,
+  exact = true,
 ): RouteConfigType => {
   return {
     path,
     component,
+    exact,
     meta: {
       layout,
       auth,

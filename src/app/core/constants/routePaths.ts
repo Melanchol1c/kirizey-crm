@@ -4,3 +4,6 @@ export const SIGN_UP_PATH = '/sign-up';
 
 /** Company paths. */
 export const COMPANY_PAGE_PATH = '/company:id';
+
+/** Dashboard paths. */
+export const DASHBOARD_PATH = '/';

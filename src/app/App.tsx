@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
 import './App.css';
-import AppRouter from './router';
+import AppRouter from './AppRouter';
 
 function App(): any {
   return (
