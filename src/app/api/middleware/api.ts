@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { camelizeKeys, decamelizeKeys } from 'humps';
+
 import { accessDenied, apiError, CALL_API } from '../store/actions';
 
 const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
@@ -39,15 +41,21 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
       url,
       method,
       headers,
-      [dataOrParams]: data,
+      [dataOrParams]: decamelizeKeys(data),
     })
     .then(({ data }) => {
+      let responseBody;
+
+      if (data) {
+        responseBody = camelizeKeys(data);
+      }
+
       if (successType) {
         dispatch({ type: successType });
       }
 
       if (afterSuccess) {
-        dispatch(afterSuccess(data));
+        dispatch(afterSuccess(responseBody));
       }
     })
     .catch(error => {

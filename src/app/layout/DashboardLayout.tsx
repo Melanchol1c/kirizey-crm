@@ -1,14 +1,20 @@
 import React from 'react';
 import { PageHeader } from 'antd';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../auth/store/selectors';
+import { User } from '../core/models/User';
 
 type DashboardLayoutType = {};
 
 const DashboardLayout: React.FC<DashboardLayoutType> = props => {
   const { children } = props;
 
+  const user: User | null = useSelector(userSelector);
+  const renderGreeting: string | null = user && `Welcome, ${user.firstName} ${user.lastName}`;
+
   return (
     <div className="dashboard-layout">
-      <PageHeader style={styles.header} title="Harmony CRM" subTitle="This is a subtitle" />
+      <PageHeader style={styles.header} title="Harmony CRM" subTitle={renderGreeting} />
       {children}
     </div>
   );
