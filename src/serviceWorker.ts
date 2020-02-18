@@ -21,7 +21,7 @@ const isLocalhost = Boolean(
 );
 
 type Config = {
-  onSuccess?: (registration: ServiceWorkerRegistration) => void;
+  afterSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
@@ -93,8 +93,8 @@ function registerValidSW(swUrl: string, config?: Config) {
               console.log('Content is cached for offline use.');
 
               // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
+              if (config && config.afterSuccess) {
+                config.afterSuccess(registration);
               }
             }
           }

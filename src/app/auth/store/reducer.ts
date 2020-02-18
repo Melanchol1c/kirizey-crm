@@ -3,7 +3,7 @@ import { LOADING_USER, LOADING_USER_SUCCESS, LOADING_USER_FAILURE } from './acti
 
 const initialState = {
   user: null as User | null,
-  loading: false,
+  userLoading: false,
 };
 
 type InitialStateType = typeof initialState;
@@ -11,13 +11,13 @@ type InitialStateType = typeof initialState;
 export default (state = initialState, { type, payload }: any): InitialStateType => {
   switch (type) {
     case LOADING_USER:
-      return { ...state, loading: true, user: null };
+      return { ...state, userLoading: true, user: null };
 
     case LOADING_USER_SUCCESS:
-      return { ...state, loading: false, user: payload };
+      return { ...state, userLoading: false, user: payload };
 
     case LOADING_USER_FAILURE:
-      return { ...state, loading: false, user: null };
+      return { ...state, userLoading: false, user: null };
 
     default:
       return state;

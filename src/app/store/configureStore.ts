@@ -1,16 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { apiMiddleware } from 'redux-api-middleware';
+import thunkMiddleware from 'redux-thunk';
+
+import apiMiddleware from '../api/middleware/api';
 import rootReducer from './rootReducer';
 
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    // eslint-disable-next-line no-undef
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any;
   }
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ serialize: true }) || compose;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function configureStore() {
-  return createStore(rootReducer, composeEnhancers(applyMiddleware(apiMiddleware)));
+  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware, apiMiddleware)));
 }

@@ -7,15 +7,18 @@ import 'antd/dist/antd.css';
 import './App.css';
 import AppRouter from './AppRouter';
 import configureStore from './store/configureStore';
+import AppLoader from './components/AppLoader/AppLoader';
 
 const store = configureStore();
 
 function App(): any {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
+      <AppLoader>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </AppLoader>
     </Provider>
   );
 }

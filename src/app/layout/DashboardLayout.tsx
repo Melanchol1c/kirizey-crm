@@ -8,16 +8,16 @@ const DashboardLayout: React.FC<DashboardLayoutType> = props => {
 
   return (
     <div className="dashboard-layout">
-      <PageHeader
-        style={{
-          border: '1px solid rgb(235, 237, 240)',
-        }}
-        title="Kirizey CRM"
-        subTitle="This is a subtitle"
-      />
+      <PageHeader style={styles.header} title="Harmony CRM" subTitle="This is a subtitle" />
       {children}
     </div>
   );
+};
+
+const styles = {
+  header: {
+    border: '1px solid rgb(235, 237, 240)',
+  },
 };
 
 export default DashboardLayout;
