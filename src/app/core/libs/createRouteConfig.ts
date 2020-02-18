@@ -6,7 +6,7 @@ const createRouteConfig = (
   component: React.FC<any>,
   layout: React.FC<any> = DefaultLayout,
   auth = false,
-  exact = true,
+  exact = false,
 ): RouteConfigType => {
   return {
     path,

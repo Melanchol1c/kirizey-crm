@@ -7,7 +7,7 @@ import auth from './auth/routes';
 import company from './client/company/routes';
 import dashboard from './client/dashboard/routes';
 
-const appRoutes: RouteConfigType[] = [...auth, ...company, ...dashboard];
+const appRoutes: RouteConfigType[] = [...dashboard, ...auth, ...company];
 
 const AppRouter = (): JSX.Element => {
   const user = true;
@@ -17,8 +17,9 @@ const AppRouter = (): JSX.Element => {
       path,
       component,
       meta: { layout, auth },
+      exact,
     } = route;
-    const renderRoute: JSX.Element = <Route key={index} path={path} component={component} />;
+    const Component = component;
 
     if (auth && !user) {
       return <Redirect key={index} to={SIGN_IN_PATH} />;
@@ -27,10 +28,21 @@ const AppRouter = (): JSX.Element => {
     if (layout) {
       const Layout = layout;
 
-      return <Layout key={index}>{renderRoute}</Layout>;
+      return (
+        <Route
+          exact={exact}
+          key={index}
+          path={path}
+          render={(props): JSX.Element => (
+            <Layout key={index}>
+              <Component {...props} />
+            </Layout>
+          )}
+        />
+      );
     }
 
-    return renderRoute;
+    return <Route exact={exact} key={index} path={path} component={component} />;
   });
 
   return (
