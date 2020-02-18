@@ -1,4 +1,12 @@
 {
+  "user_profile": {
+    "id": 1,
+    "first_name": "Dominique",
+    "last_name": "Allington",
+    "email": "dallington0@independent.co.uk",
+    "gender": "Female",
+    "user_role": "Data Coordiator"
+  },
   "companies": [
     {
       "id": 1,

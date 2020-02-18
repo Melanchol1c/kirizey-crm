@@ -45,11 +45,7 @@ const AppRouter = (): JSX.Element => {
     return <Route exact={exact} key={index} path={path} component={component} />;
   });
 
-  return (
-    <>
-      <Switch>{renderAppRoutes}</Switch>
-    </>
-  );
+  return <Switch>{renderAppRoutes}</Switch>;
 };
 
 export default AppRouter;
