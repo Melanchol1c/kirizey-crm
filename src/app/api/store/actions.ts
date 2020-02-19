@@ -7,7 +7,6 @@ export type CALL_API_PAYLOAD_TYPE = {
   method: string;
   data?: object;
   params?: object;
-  accessToken?: string;
   headersOverride?: any;
   afterSuccess?: any;
   afterError?: any;

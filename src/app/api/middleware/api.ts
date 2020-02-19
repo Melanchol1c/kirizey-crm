@@ -13,7 +13,6 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     method,
     data,
     params,
-    accessToken,
     afterSuccess,
     afterError,
     headers,
@@ -23,10 +22,14 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     successType,
   } = action.payload;
 
-  // axios default configs
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || '';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+  const accessToken = localStorage.getItem('accessToken');
+
+  if (accessToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+  }
 
   if (beforeStart) {
     dispatch(beforeStart(data));
