@@ -2,6 +2,7 @@ import axios from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 
 import { accessDenied, apiError, CALL_API } from '../store/actions';
+import { showNotification } from '../../core/libs';
 
 const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
   next(action);
@@ -25,7 +26,7 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || '';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken: string | null = localStorage.getItem('accessToken');
 
   if (accessToken) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
@@ -64,6 +65,8 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     })
     .catch(error => {
       dispatch(apiError(error));
+
+      showNotification('Internal Server Error', 'Please try to refresh the page...', 'error');
 
       if (errorType) {
         dispatch({ type: errorType });

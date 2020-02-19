@@ -3,7 +3,7 @@ import { LOADING_USER, LOADING_USER_SUCCESS, LOADING_USER_FAILURE } from './acti
 
 const initialState = {
   user: null as User | null,
-  userLoading: false,
+  userLoading: true,
 };
 
 type InitialStateType = typeof initialState;

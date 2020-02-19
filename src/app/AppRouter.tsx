@@ -6,8 +6,13 @@ import { SIGN_IN_PATH } from './core/constants/routePaths';
 import auth from './auth/routes';
 import company from './client/company/routes';
 import dashboard from './client/dashboard/routes';
+import profile from './client/profile/routes';
+import NotFoundPage from './pages/NotFoundPage';
+import { createRouteConfig } from './core/libs';
 
-const appRoutes: RouteConfigType[] = [...dashboard, ...auth, ...company];
+const notFoundRoute = createRouteConfig('**', NotFoundPage);
+
+const appRoutes: RouteConfigType[] = [...dashboard, ...auth, ...company, ...profile, notFoundRoute];
 
 const AppRouter = (): JSX.Element => {
   const user = true;
