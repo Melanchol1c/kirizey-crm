@@ -3,7 +3,7 @@ import DefaultLayout from '../../layout/DefaultLayout';
 
 const createRouteConfig = (
   path: string,
-  component: React.FC<any>,
+  component: any,
   layout: React.FC<any> = DefaultLayout,
   auth = false,
   exact = false,
