@@ -12,6 +12,7 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     url,
     method,
     data,
+    params,
     accessToken,
     afterSuccess,
     afterError,
@@ -21,7 +22,6 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     errorType,
     successType,
   } = action.payload;
-  const dataOrParams = ['GET', 'DELETE'].includes(method) ? 'params' : 'data';
 
   // axios default configs
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || '';
@@ -41,7 +41,8 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
       url,
       method,
       headers,
-      [dataOrParams]: decamelizeKeys(data),
+      data: decamelizeKeys(data),
+      params: decamelizeKeys(params),
     })
     .then(({ data }) => {
       let responseBody;
