@@ -1,4 +1,4 @@
-import { USE_API } from '../../api/store/actions';
+import { CALL_API, CALL_API_PAYLOAD_TYPE } from '../../api/store/actions';
 import { User } from '../../core/models/User';
 
 export const LOADING_USER = Symbol('LOADING_USER');
@@ -10,15 +10,23 @@ type SetUserActionType = {
   payload: User;
 };
 
+type LoadUserType = {
+  type: typeof CALL_API;
+  payload: CALL_API_PAYLOAD_TYPE;
+};
+
 const setUser = (data: User): SetUserActionType => ({
   type: LOADING_USER_SUCCESS,
   payload: data,
 });
 
-export const loadUserProfile = USE_API({
-  url: '/user_profile',
-  method: 'GET',
-  startType: LOADING_USER,
-  errorType: LOADING_USER_FAILURE,
-  afterSuccess: setUser,
-});
+export const loadUserProfile: LoadUserType = {
+  type: CALL_API,
+  payload: {
+    url: '/user_profile',
+    method: 'GET',
+    startType: LOADING_USER,
+    errorType: LOADING_USER_FAILURE,
+    afterSuccess: setUser,
+  },
+};
