@@ -10,7 +10,12 @@ type SetUserActionType = {
   payload: User;
 };
 
-type LoadUserType = {
+type LoadUserActionType = {
+  type: typeof CALL_API;
+  payload: CALL_API_PAYLOAD_TYPE;
+};
+
+type SignUpActionType = {
   type: typeof CALL_API;
   payload: CALL_API_PAYLOAD_TYPE;
 };
@@ -20,7 +25,7 @@ const setUser = (data: User): SetUserActionType => ({
   payload: data,
 });
 
-export const loadUserProfile: LoadUserType = {
+export const loadUserProfile: LoadUserActionType = {
   type: CALL_API,
   payload: {
     url: '/user_profile',
@@ -30,3 +35,12 @@ export const loadUserProfile: LoadUserType = {
     afterSuccess: setUser,
   },
 };
+
+export const signUp = (data: any): SignUpActionType => ({
+  type: CALL_API,
+  payload: {
+    url: '/register',
+    method: 'POST',
+    data,
+  },
+});

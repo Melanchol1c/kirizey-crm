@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Input, Icon, Typography, Button } from 'antd';
+
+import { SIGN_UP_PATH } from '../../core/constants/routePaths';
 
 type SignInPageType = {
   form: any;
@@ -54,6 +57,9 @@ const SignInPage: React.FC<SignInPageType> = props => {
         <Button icon="login" type="primary" htmlType="submit" style={styles.button} loading={loading}>
           Submit
         </Button>
+        <Form.Item>
+          or <Link to={SIGN_UP_PATH}>sign up</Link>
+        </Form.Item>
       </Form>
     </div>
   );

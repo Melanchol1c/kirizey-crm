@@ -4,7 +4,7 @@ export const CALL_API_ERROR = Symbol('CALL_API_ERROR');
 
 export type CALL_API_PAYLOAD_TYPE = {
   url: string;
-  method: string;
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   data?: object;
   params?: object;
   headersOverride?: any;
