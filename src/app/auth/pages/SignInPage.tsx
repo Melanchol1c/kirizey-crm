@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Icon, Typography, Button } from 'antd';
+import { Helmet } from 'react-helmet';
 
 import { SIGN_UP_PATH } from '../../core/constants/routePaths';
 
@@ -9,7 +10,8 @@ type SignInPageType = {
 };
 
 const SignInPage: React.FC<SignInPageType> = props => {
-  const { getFieldDecorator, validateFields } = props.form;
+  const { form } = props;
+  const { getFieldDecorator, validateFields } = form;
   const [loading, setLoading] = useState<boolean>(false);
 
   const emailDecorator = getFieldDecorator('email', {
@@ -49,19 +51,24 @@ const SignInPage: React.FC<SignInPageType> = props => {
   };
 
   return (
-    <div style={styles.container}>
-      <Typography.Title level={3}>Sign In</Typography.Title>
-      <Form onSubmit={handleSubmit}>
-        <Form.Item>{emailDecorator}</Form.Item>
-        <Form.Item>{passwordDecorator}</Form.Item>
-        <Button icon="login" type="primary" htmlType="submit" style={styles.button} loading={loading}>
-          Submit
-        </Button>
-        <Form.Item>
-          or <Link to={SIGN_UP_PATH}>sign up</Link>
-        </Form.Item>
-      </Form>
-    </div>
+    <>
+      <Helmet>
+        <title>Harmony CRM | Sign In</title>
+      </Helmet>
+      <div style={styles.container}>
+        <Typography.Title level={3}>Sign In</Typography.Title>
+        <Form onSubmit={handleSubmit}>
+          <Form.Item>{emailDecorator}</Form.Item>
+          <Form.Item>{passwordDecorator}</Form.Item>
+          <Button icon="login" type="primary" htmlType="submit" style={styles.button} loading={loading}>
+            Submit
+          </Button>
+          <Form.Item>
+            or <Link to={SIGN_UP_PATH}>sign up</Link>
+          </Form.Item>
+        </Form>
+      </div>
+    </>
   );
 };
 
