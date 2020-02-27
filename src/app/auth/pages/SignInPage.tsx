@@ -4,6 +4,7 @@ import { Form, Input, Icon, Typography, Button } from 'antd';
 import { Helmet } from 'react-helmet';
 
 import { SIGN_UP_PATH } from '../../core/constants/routePaths';
+import { SignInUpFormDataType } from '../store/actions';
 
 type SignInPageType = {
   form: any;
@@ -36,17 +37,14 @@ const SignInPage: React.FC<SignInPageType> = props => {
     ],
   })(<Input type="password" prefix={<Icon type="lock" style={styles.icon} />} placeholder="Password" />);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
 
-    validateFields((err: any, values: any) => {
-      if (!err) {
+    validateFields((error: any, { email, password }: SignInUpFormDataType) => {
+      if (!error) {
         setLoading(true);
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', email, password);
       }
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
     });
   };
 
