@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 import { Form, Input, Icon, Typography, Button } from 'antd';
 import Helmet from 'react-helmet';
 import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { SIGN_IN_PATH } from '../../core/constants/routePaths';
-import { SignInUpFormDataType, signUp, SignUpActionType } from '../store/actions';
+import { SignInUpFormDataType, signUp } from '../store/actions';
+import { CallApiDispatchType } from '../../api/store/actions';
 
 type SignUpPageType = {
   form: any;
 };
 
-type DispatchTypes = Dispatch<SignUpActionType>;
-
 const SignUpPage: React.FC<SignUpPageType> = props => {
   const { getFieldDecorator, validateFields } = props.form;
   const [loading, setLoading] = useState<boolean>(false);
-  const dispatch = useDispatch<DispatchTypes>();
+  const dispatch = useDispatch<CallApiDispatchType>();
 
   const emailDecorator = getFieldDecorator('email', {
     rules: [

@@ -4,7 +4,7 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import { accessDenied, apiError, CALL_API } from '../store/actions';
 import { showNotification } from '../../core/libs';
 
-const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
+const apiMiddleware = ({ dispatch }: any) => (next: any) => async (action: any) => {
   next(action);
 
   if (action.type !== CALL_API) return;
@@ -40,7 +40,7 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
     dispatch({ type: startType });
   }
 
-  axios
+  await axios
     .request({
       url,
       method,

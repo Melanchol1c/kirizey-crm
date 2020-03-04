@@ -14,7 +14,7 @@ const AppLoader: React.FC<AppLoaderType> = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserProfile);
+    dispatch(loadUserProfile());
   }, [dispatch]);
 
   const renderApplication = loading ? (
