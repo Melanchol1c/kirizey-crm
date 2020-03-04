@@ -1763,6 +1763,35 @@
       "email": "asd@asd.asda",
       "password": "$2a$10$TA2diO2l/xH8U0MSPS7LzO67NQ4CNORlcRHVsrcmnOW3HVz5ppC6S",
       "id": 109
+    },
+    {
+      "email": "asd@ad.asd",
+      "password": "$2a$10$1HyID8nnbX9qVj2GE2KGmukAEkSX/7ceGLTQi64Rl8XjfWwVLqCfS",
+      "id": 110
+    },
+    {
+      "email": "asd@asd.ads",
+      "password": "$2a$10$b9TuUGd7cglveOCNg8boROIl/lwOoe0X4qQQnG3y1AYPNTwYJf/3e",
+      "id": 111
+    },
+    {
+      "email": "asd+1@asd.asd",
+      "password": "$2a$10$i6f0hboyl.DcO.fkn3lu2enayV2uP/MYgDXOi6oPvbWYBUOcGcZz6",
+      "id": 112
+    },
+    {
+      "email": "asd+2@asd.asd",
+      "password": "$2a$10$zp3N8koIqEErblzpC5ZfqOmdtNptOdopMnqbc/GHgK0klqnpMb9R.",
+      "first_name": "asdadad",
+      "last_name": "dasasda",
+      "id": 113
+    },
+    {
+      "email": "asdad@asdada.da.sd",
+      "password": "$2a$10$qK0mMydh54JlOiMsfvCHueCzyA7BwvxOSWY1yiH4iS6xeGWpSTE6u",
+      "first_name": "Kirill",
+      "last_name": "Vega+",
+      "id": 114
     }
   ]
 }

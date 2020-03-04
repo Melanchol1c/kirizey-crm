@@ -33,7 +33,7 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => async (action: any) 
   }
 
   if (beforeStart) {
-    dispatch(beforeStart(data));
+    beforeStart(data);
   }
 
   if (startType) {
@@ -60,23 +60,26 @@ const apiMiddleware = ({ dispatch }: any) => (next: any) => async (action: any) 
       }
 
       if (afterSuccess) {
-        dispatch(afterSuccess(responseBody));
+        afterSuccess(responseBody);
       }
     })
     .catch(error => {
       dispatch(apiError(error));
-
-      showNotification('Internal Server Error', 'Please try to refresh the page...', 'error');
 
       if (errorType) {
         dispatch({ type: errorType });
       }
 
       if (afterError) {
-        dispatch(afterError(error));
+        afterError(error);
       }
 
-      if (error.response && error.response.status === 403) {
+      if (error.response && error.response.status === 500) {
+        showNotification('Internal Server Error', 'Please try to refresh the page...', 'error');
+      }
+
+      if (error.response && error.response.status === 401) {
+        showNotification('Access denied', '', 'error');
         dispatch(accessDenied(window.location.pathname));
       }
     });
