@@ -88,24 +88,26 @@ const SignUpPage: React.FC<SignUpPageType> = props => {
       <div style={styles.container}>
         <Typography.Title level={3}>Sign Up</Typography.Title>
         <Form onSubmit={handleSubmit}>
-          <Form.Item>{emailDecorator}</Form.Item>
-          <Form.Item>{passwordDecorator}</Form.Item>
-          <Form.Item>{firstNameDecorator}</Form.Item>
-          <Form.Item>{lastNameDecorator}</Form.Item>
-          <Form.Item label="Gender" hasFeedback>
-            <Select defaultValue={'male'}>
-              <Select.Option value="female">Female</Select.Option>
-              <Select.Option value="male">Male</Select.Option>
-              <Select.Option value="else">Else</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item label="Role" hasFeedback>
-            <Select defaultValue={'juniorResearcher'}>
-              <Select.Option value="analyst">Analyst</Select.Option>
-              <Select.Option value="researcher">Researcher</Select.Option>
-              <Select.Option value="juniorResearcher">Junior Researcher</Select.Option>
-            </Select>
-          </Form.Item>
+          <div style={styles.formFields} className="form-fields">
+            <Form.Item>{emailDecorator}</Form.Item>
+            <Form.Item>{passwordDecorator}</Form.Item>
+            <Form.Item>{firstNameDecorator}</Form.Item>
+            <Form.Item>{lastNameDecorator}</Form.Item>
+            <Form.Item hasFeedback>
+              <Select defaultValue={'male'}>
+                <Select.Option value="female">Female</Select.Option>
+                <Select.Option value="male">Male</Select.Option>
+                <Select.Option value="else">Else</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item hasFeedback>
+              <Select defaultValue={'juniorResearcher'}>
+                <Select.Option value="analyst">Analyst</Select.Option>
+                <Select.Option value="researcher">Researcher</Select.Option>
+                <Select.Option value="juniorResearcher">Junior Researcher</Select.Option>
+              </Select>
+            </Form.Item>
+          </div>
           <Button icon="login" type="primary" htmlType="submit" style={styles.button} loading={loading}>
             Submit
           </Button>
@@ -119,9 +121,14 @@ const SignUpPage: React.FC<SignUpPageType> = props => {
 };
 
 const styles = {
-  container: { width: 300 },
+  container: { width: 520 },
   icon: { color: 'rgba(0,0,0,.25)' },
   button: { width: '100%' },
+  formFields: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gridGap: 10,
+  },
 };
 
 const WrappedSignUpPage = Form.create({ name: 'signUp' })(SignUpPage);
