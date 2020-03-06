@@ -1,9 +1,11 @@
 import { CALL_API, CallApiDispatchType } from '../../api/store/actions';
 import { User } from '../../core/models/User';
+import { Action } from 'redux';
 
 export const LOADING_USER = Symbol('LOADING_USER');
 export const SET_USER = Symbol('SET_USER');
 export const LOADING_USER_FAILURE = Symbol('LOADING_USER_FAILURE');
+export const RESET_USER = Symbol('RESET_USER');
 
 type SetUserActionType = {
   type: typeof SET_USER;
@@ -49,3 +51,5 @@ export const signUp = (data: User, afterError: any, afterSuccess: any) => (
     },
   });
 };
+
+export const resetUser = (): Action => ({ type: RESET_USER });

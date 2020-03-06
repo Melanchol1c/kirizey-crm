@@ -1,5 +1,5 @@
 import { User } from '../../core/models/User';
-import { LOADING_USER, SET_USER, LOADING_USER_FAILURE } from './actions';
+import { LOADING_USER, SET_USER, LOADING_USER_FAILURE, RESET_USER } from './actions';
 
 const initialState = {
   user: null as User | null,
@@ -18,6 +18,9 @@ export default (state = initialState, { type, payload }: any): InitialStateType 
 
     case LOADING_USER_FAILURE:
       return { ...state, userLoading: false, user: null };
+
+    case RESET_USER:
+      return { ...state, user: null };
 
     default:
       return state;

@@ -1,21 +1,28 @@
 import React from 'react';
 import { PageHeader, Button, Typography, Icon, Popconfirm } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { userSelector } from '../auth/store/selectors';
 import { User } from '../core/models/User';
 import { PROFILE_PATH, INDEX_PATH, SIGN_IN_PATH } from '../core/constants/routePaths';
 import { Link, useHistory } from 'react-router-dom';
+import { resetUser } from '../auth/store/actions';
 
 type DashboardLayoutType = {};
 
 const DashboardLayout: React.FC<DashboardLayoutType> = props => {
   const { children } = props;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const user: User | null = useSelector(userSelector);
   const renderGreeting: string | null = user && `${user.firstName} ${user.lastName}`;
   const logoutConfirmMessage = 'Are you sure to logout?';
+
+  const handleLogout = (): void => {
+    dispatch(resetUser());
+    history.push(SIGN_IN_PATH);
+  };
 
   return (
     <div className="dashboard-layout">
@@ -36,9 +43,7 @@ const DashboardLayout: React.FC<DashboardLayoutType> = props => {
             key="logout"
             placement="bottomRight"
             title={logoutConfirmMessage}
-            onConfirm={(): void => {
-              history.push(SIGN_IN_PATH);
-            }}
+            onConfirm={handleLogout}
             okText="Yes"
             cancelText="No"
           >
