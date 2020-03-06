@@ -1828,6 +1828,15 @@
       "role": "juniorResearcher",
       "gender": "male",
       "id": 118
+    },
+    {
+      "email": "kirill@asd.asd",
+      "password": "$2a$10$MBrmoIhLCVALqyjk6oH7PeatqPzpXt/ZMpFcVcdjnm6JQF6wWYexe",
+      "first_name": "Kirill",
+      "last_name": "Dolgikh",
+      "role": "analyst",
+      "gender": "male",
+      "id": 119
     }
   ]
 }

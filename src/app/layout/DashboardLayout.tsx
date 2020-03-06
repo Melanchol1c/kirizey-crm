@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader, Button, Typography, Icon, Popconfirm } from 'antd';
+import { PageHeader, Button, Typography, Icon, Popconfirm, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { userSelector } from '../auth/store/selectors';
@@ -21,11 +21,12 @@ const DashboardLayout: React.FC<DashboardLayoutType> = props => {
 
   const handleLogout = (): void => {
     dispatch(resetUser());
+    message.warning('You logged out');
     history.push(SIGN_IN_PATH);
   };
 
   return (
-    <div className="dashboard-layout">
+    <div style={styles.layout} className="dashboard-layout">
       <PageHeader
         style={styles.header}
         title={
@@ -59,6 +60,11 @@ const DashboardLayout: React.FC<DashboardLayoutType> = props => {
 };
 
 const styles = {
+  layout: {
+    height: '100vh',
+    width: '100vw',
+    overflow: 'hidden',
+  },
   header: {
     border: '1px solid rgb(235, 237, 240)',
   },

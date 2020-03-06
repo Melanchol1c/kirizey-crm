@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Icon, Typography, Button } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { Form, Input, Icon, Typography, Button, message } from 'antd';
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { AxiosError } from 'axios';
 
-import { SIGN_UP_PATH } from '../../core/constants/routePaths';
-import { SignInUpFormDataType } from '../store/actions';
+import { SIGN_UP_PATH, DASHBOARD_PATH } from '../../core/constants/routePaths';
+import { SignInFormDataType, signIn } from '../store/actions';
 
 type SignInPageType = {
   form: any;
@@ -13,6 +15,8 @@ type SignInPageType = {
 const SignInPage: React.FC<SignInPageType> = props => {
   const { form } = props;
   const { getFieldDecorator, validateFields } = form;
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(false);
 
   const emailDecorator = getFieldDecorator('email', {
@@ -40,12 +44,24 @@ const SignInPage: React.FC<SignInPageType> = props => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    validateFields((error: any, { email, password }: SignInUpFormDataType) => {
+    validateFields(async (error: any, { email, password }: SignInFormDataType) => {
       if (!error) {
         setLoading(true);
-        console.log('Received values of form: ', email, password);
+        dispatch(await signIn({ email, password }, handleError, handleSuccess));
+        setLoading(false);
       }
     });
+  };
+
+  const handleSuccess = (): void => {
+    message.success('You logged in!');
+    history.push(DASHBOARD_PATH);
+  };
+
+  const handleError = (error: AxiosError) => {
+    if (error.response) {
+      message.error(error.response.data);
+    }
   };
 
   return (

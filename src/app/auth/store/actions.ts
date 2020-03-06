@@ -12,7 +12,7 @@ type SetUserActionType = {
   payload: User;
 };
 
-export type SignInUpFormDataType = {
+export type SignInFormDataType = {
   email: string;
   password: string;
 };
@@ -31,6 +31,9 @@ export const loadUserProfile = () => (dispatch: any): CallApiDispatchType =>
       startType: LOADING_USER,
       errorType: LOADING_USER_FAILURE,
       afterSuccess: (data: User): CallApiDispatchType => dispatch(setUser(data)),
+      afterError: () => {
+        window.location.href = '/sign-in';
+      },
     },
   });
 
@@ -43,9 +46,28 @@ export const signUp = (data: User, afterError: any, afterSuccess: any) => (
       url: '/register',
       method: 'POST',
       data,
-      afterSuccess: (res: User): void => {
+      afterSuccess: (res: any): void => {
         afterSuccess();
+        localStorage.setItem('token', res.accessToken);
         dispatch(setUser(data));
+      },
+      afterError,
+    },
+  });
+};
+
+export const signIn = (data: SignInFormDataType, afterError: any, afterSuccess: any) => (
+  dispatch: CallApiDispatchType,
+): CallApiDispatchType => {
+  return dispatch({
+    type: CALL_API,
+    payload: {
+      url: '/login',
+      method: 'POST',
+      data,
+      afterSuccess: (res: any): void => {
+        afterSuccess();
+        localStorage.setItem('token', res.accessToken);
       },
       afterError,
     },

@@ -16,6 +16,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
+    width: '100vw',
+    overflow: 'hidden',
   },
 };
 
