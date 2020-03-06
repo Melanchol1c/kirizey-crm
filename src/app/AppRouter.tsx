@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { RouteConfigType } from './core/models/RouteConfigType';
 import { SIGN_IN_PATH } from './core/constants/routePaths';
@@ -15,6 +16,7 @@ const notFoundRoute = createRouteConfig('**', NotFoundPage);
 const appRoutes: RouteConfigType[] = [...dashboard, ...auth, ...company, ...profile, notFoundRoute];
 
 const AppRouter = (): JSX.Element => {
+  const location = useLocation();
   const user = true;
 
   const renderAppRoutes: JSX.Element[] = appRoutes.map((route, index) => {
@@ -50,7 +52,13 @@ const AppRouter = (): JSX.Element => {
     return <Route exact={exact} key={index} path={path} component={component} />;
   });
 
-  return <Switch>{renderAppRoutes}</Switch>;
+  return (
+    <TransitionGroup>
+      <CSSTransition key={location.key} timeout={{ enter: 100, exit: 100 }} classNames="fade">
+        <Switch>{renderAppRoutes}</Switch>
+      </CSSTransition>
+    </TransitionGroup>
+  );
 };
 
 export default AppRouter;
