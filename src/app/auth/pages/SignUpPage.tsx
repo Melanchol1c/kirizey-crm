@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, Icon, Typography, Button, message, Select } from 'antd';
 import Helmet from 'react-helmet';
 import { useDispatch } from 'react-redux';
 
-import { SIGN_IN_PATH } from '../../core/constants/routePaths';
+import { SIGN_IN_PATH, DASHBOARD_PATH } from '../../core/constants/routePaths';
 import { signUp } from '../store/actions';
 import { CallApiDispatchType } from '../../api/store/actions';
 import { AxiosError } from 'axios';
@@ -15,8 +15,11 @@ type SignUpPageType = {
 
 const SignUpPage: React.FC<SignUpPageType> = props => {
   const { getFieldDecorator, validateFields } = props.form;
+  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<CallApiDispatchType>();
+  const [role, setRole] = useState<string>('juniorResearcher');
+  const [gender, setGender] = useState<string>('male');
 
   const emailDecorator = getFieldDecorator('email', {
     rules: [
@@ -63,8 +66,9 @@ const SignUpPage: React.FC<SignUpPageType> = props => {
 
     validateFields(async (error: any, values: any) => {
       if (!error) {
+        const payload = { ...values, role, gender };
         setLoading(true);
-        await dispatch(signUp(values, handleApiError, handleApiSuccess));
+        await dispatch(signUp(payload, handleApiError, handleApiSuccess));
         setLoading(false);
       }
     });
@@ -77,7 +81,16 @@ const SignUpPage: React.FC<SignUpPageType> = props => {
   };
 
   const handleApiSuccess = (): void => {
-    message.success('Success!');
+    message.success('You successfully registered!');
+    history.push(DASHBOARD_PATH);
+  };
+
+  const handleGenderChange: any = (value: string) => {
+    setGender(value);
+  };
+
+  const handleRoleChange: any = (value: string) => {
+    setRole(value);
   };
 
   return (
@@ -94,14 +107,14 @@ const SignUpPage: React.FC<SignUpPageType> = props => {
             <Form.Item>{firstNameDecorator}</Form.Item>
             <Form.Item>{lastNameDecorator}</Form.Item>
             <Form.Item hasFeedback>
-              <Select defaultValue={'male'}>
+              <Select onChange={handleGenderChange} value={gender}>
                 <Select.Option value="female">Female</Select.Option>
                 <Select.Option value="male">Male</Select.Option>
                 <Select.Option value="else">Else</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item hasFeedback>
-              <Select defaultValue={'juniorResearcher'}>
+              <Select onChange={handleRoleChange} value={role}>
                 <Select.Option value="analyst">Analyst</Select.Option>
                 <Select.Option value="researcher">Researcher</Select.Option>
                 <Select.Option value="juniorResearcher">Junior Researcher</Select.Option>

@@ -1792,6 +1792,42 @@
       "first_name": "Kirill",
       "last_name": "Vega+",
       "id": 114
+    },
+    {
+      "email": "asdas@sasd.as.das",
+      "password": "$2a$10$2CPfHtdKG9.PzTAD/QR7Y.CGdksVlSOn9WwRwX.O1DHnlY5TsRqNa",
+      "first_name": "asadsadsadsd",
+      "last_name": "aasdadsdadsads",
+      "role": "juniorResearcher",
+      "gender": "male",
+      "id": 115
+    },
+    {
+      "email": "asdasd@sada.dsa",
+      "password": "$2a$10$p2EjTfRdSRGi4B3F12k5KuL5lqh3uL8LQ80Q9IxRkogk/MsnbVLey",
+      "first_name": "Test user cool",
+      "last_name": "Ddasdaads sad",
+      "role": "juniorResearcher",
+      "gender": "male",
+      "id": 116
+    },
+    {
+      "email": "asdasd@asd.asdasd",
+      "password": "$2a$10$SOUowJG5c2CldWPU6gg5MOkpza19l/Fn.xtB1L1i8TTsIvXtdCu5C",
+      "first_name": "dasdasdas",
+      "last_name": "wsasdasdasda",
+      "role": "juniorResearcher",
+      "gender": "male",
+      "id": 117
+    },
+    {
+      "email": "asdas@asda.sd",
+      "password": "$2a$10$tqmsS.ygzvzO3pDrq/ADn.VUp5WdnugbDcM83LirSQ14iBnTpMabC",
+      "first_name": "dasdasd",
+      "last_name": "asddasd",
+      "role": "juniorResearcher",
+      "gender": "male",
+      "id": 118
     }
   ]
 }
